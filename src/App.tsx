@@ -1,11 +1,23 @@
 import { createRoot } from "react-dom/client";
-import Search from "./Search";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Search from "./components/Search";
+import LandingPageShows from "./components/LandingPageShows";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    },
+  },
+});
 
 const App = () => {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <Search />
-    </div>
+      <LandingPageShows />
+    </QueryClientProvider>
   );
 };
 
