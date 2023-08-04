@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Search from "./components/Search";
 import LandingPageShows from "./components/LandingPageShows";
 
@@ -14,10 +15,22 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Search />
-      <LandingPageShows />
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Search />
+                <LandingPageShows />
+              </>
+            }
+          />
+          <Route path="/show" element="show" />
+        </Routes>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 };
 

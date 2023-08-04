@@ -1,4 +1,5 @@
 import { Shows as ShowsProps } from "../types/common";
+import { getYearFromDateString } from "../utils/common";
 
 const Shows = ({ shows }: { shows: ShowsProps }) => {
   return (
@@ -18,11 +19,10 @@ const Shows = ({ shows }: { shows: ShowsProps }) => {
               </div>
               <h3 className="mt-2 text-xs text-gray-700">
                 {show.status === "Ended" && show.ended
-                  ? `${new Date(show.premiered).getFullYear()} - ${new Date(
-                      show.ended
-                    ).getFullYear()}`
-                  : `Since ${new Date(show.premiered).getFullYear()}`}
-                2
+                  ? `${getYearFromDateString(
+                      show.premiered
+                    )} - ${getYearFromDateString(show.ended)}`
+                  : `Since ${getYearFromDateString(show.premiered)}`}
               </h3>
               <p className="mt-1 text-sm font-medium text-gray-900">
                 {show.name}
